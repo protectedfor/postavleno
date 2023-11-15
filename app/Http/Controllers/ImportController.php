@@ -32,7 +32,7 @@ class ImportController extends Controller
         }
 
         $added_count = DB::table('users')->whereNull('password')->whereColumn('created_at', '=', 'updated_at')->where('created_at', '>=', $startedAt)->count();
-        $updated_count = DB::table('users')->whereNull('password')->whereColumn('created_at', '!=', 'updated_at')->where('updated_at', '>=', $startedAt)->count();
+        $updated_count = DB::table('users')->whereNull('password')->where('updated_at', '>', $startedAt)->count();
 
         return [
             'total'   => DB::table('users')->whereNull('password')->count(),
