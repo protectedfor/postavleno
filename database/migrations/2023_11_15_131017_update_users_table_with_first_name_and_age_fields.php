@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('last_name')->after('first_name')->nullable();
             $table->integer('age')->after('email')->nullable();
             $table->index(['first_name', 'last_name'], 'users_first_name_last_name_index');
+            $table->unique(['first_name', 'last_name']);
         });
     }
 
@@ -34,6 +35,7 @@ return new class extends Migration
             $table->dropColumn('last_name');
             $table->dropColumn('age');
             $table->dropIndex('users_first_name_last_name_index');
+            $table->dropUnique(['first_name', 'last_name']);
         });
     }
 };
