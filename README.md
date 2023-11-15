@@ -14,6 +14,7 @@
 - setup `.env` with database credentials
 - run `composer install`
 - run `php artisan migrate`
+- run `php artisan key:generate`
 - run `npm install`
 - run `npm run dev`
 - register on site
