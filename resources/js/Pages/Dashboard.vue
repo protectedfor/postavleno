@@ -8,6 +8,7 @@ export default {
         AuthenticatedLayout,
         Head
     },
+    props: ['total_users'],
     // Properties returned from data() become reactive state
     // and will be exposed on `this`.
     data() {
@@ -35,6 +36,10 @@ export default {
                     this.importing = false;
                 });
         }
+    },
+
+    created() {
+        this.total = this.total_users;
     },
 
     mounted() {
