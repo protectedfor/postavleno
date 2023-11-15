@@ -12,7 +12,10 @@ export default {
     // and will be exposed on `this`.
     data() {
         return {
-            importing: false
+            importing: false,
+            total: 0,
+            added: 0,
+            updated: 0,
         }
     },
 
@@ -21,8 +24,10 @@ export default {
     methods: {
         async importUsers() {
             this.importing = true;
-            const res = await axios.get('https://randomuser.me/api', {params: {results: 50}}).then((res) => {
-                console.log(res.data);
+            const res = await axios.get('/api/import').then((res) => {
+                this.total = res.data.total;
+                this.added = res.data.added;
+                this.updated = res.data.updated;
                 this.importing = false;
             })
                 .catch((err) => {
@@ -32,9 +37,6 @@ export default {
         }
     },
 
-    // Lifecycle hooks are called at different stages
-    // of a component's lifecycle.
-    // This function will be called when the component is mounted.
     mounted() {
 
     }
@@ -62,7 +64,7 @@ export default {
                             <span v-if="importing">Загружается...</span>
                             <span v-else>Импортировать пользователей</span>
                         </button>
-                        Всего: <b>140</b>, Добавлено: <b>100</b>, Обновлено: <b>20</b>
+                        Всего: <b>{{ total }}</b>, Добавлено: <b>{{ added }}</b>, Обновлено: <b>{{ updated }}</b>
                     </div>
                 </div>
             </div>
